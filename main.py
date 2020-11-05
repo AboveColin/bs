@@ -28,10 +28,11 @@ total_pages_rest = T_count % 10
 
 
 def next_page(n, max):
-    print(get_T_info(n))
     if max <= 8:
-        return config.T1
+        print(config.T1)
+        exit()
     if max > 8:
+        print(get_T_info(n))
         if n == 2:
             P_button = driver.find_element_by_id(config.E5_1)
             C_page = driver.find_element_by_id(config.E6_1).text
@@ -70,8 +71,8 @@ def get_T_info(x):
     if x == total_pages + 1:
         for x in range(1, total_pages_rest + 1):
             x = str(x).zfill(2)
-            A_Name = driver.find_element_by_id(config.E4_1 + x + E4_2).text
-            T_name = driver.find_element_by_id(config.E4_1 + x + E4_3).text
+            A_Name = driver.find_element_by_id(config.E4_1 + x + config.E4_2).text
+            T_name = driver.find_element_by_id(config.E4_1 + x + config.E4_3).text
 
             print(A_Name + ' - ' + T_name)
     else:
@@ -79,8 +80,8 @@ def get_T_info(x):
         for x in range(1, 11):
             if x < 10:
                 x = str(x).zfill(2)
-            A_Name = driver.find_element_by_id(config.E4_1 + str(x) + E4_2).text
-            T_name = driver.find_element_by_id(config.E4_1 + str(x) + E4_3).text
+            A_Name = driver.find_element_by_id(config.E4_1 + str(x) + config.E4_2).text
+            T_name = driver.find_element_by_id(config.E4_1 + str(x) + config.E4_3).text
 
             print(A_Name + ' - ' + T_name)
 
