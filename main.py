@@ -25,7 +25,7 @@ total_pages = T_count // 10
 total_pages_rest = T_count % 10
 
 def next_page(n, max):
-    print(get_T_info(n))
+    get_T_info(n)
     P_button = driver.find_element_by_id(config.E5)
     P_button.click()
     return n-1
