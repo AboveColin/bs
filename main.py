@@ -11,9 +11,8 @@ driver = webdriver.Chrome(config.CDP,
 
 driver.delete_all_cookies()
 driver.get(config.URL1)
-
-search_box = driver.find_element_by_name(config.E1)
-search_box.send_keys(config.args.a)
+search_box = driver.find_element_by_id(config.mode)
+search_box.send_keys(config.name)
 python_button = driver.find_element_by_name(config.E2)
 python_button.click()
 
@@ -34,7 +33,7 @@ def next_page(n, max):
 def get_T_info(x):
     if x == total_pages + 2:
         for x in range(1, total_pages_rest + 1):
-            x = str(x).zfill(2)
+            x = str(x).zfill(2)        
             A_Name = driver.find_element_by_id(config.E4_1 + x + config.E4_2).text
             T_name = driver.find_element_by_id(config.E4_1 + x + config.E4_3).text
 
