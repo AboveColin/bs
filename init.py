@@ -31,9 +31,6 @@ E4_3 = config.get('Elements', 'E4_3')
 
 E5 = config.get('Elements', 'E5')
 
-T1 = config.get('Text', 'T1')
-T2 = config.get('Text', 'T2')
-T3 = config.get('Text', 'T3')
 
 if args.composer:
     mode = E1_3
