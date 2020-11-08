@@ -7,6 +7,9 @@ import re
 
 chrome_options = Options()
 chrome_options.add_argument('--headless')
+chrome_options.add_argument('--log-level=3')
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 driver = webdriver.Chrome(config.CDP,
                           options=chrome_options)
 
@@ -20,6 +23,9 @@ driver.get(config.URL2)
 T_count = int(re.sub("[^0-9]", "", driver.find_element_by_id(config.E3).text))
 total_pages = T_count // 10
 total_pages_rest = T_count % 10
+
+if total_pages_rest != 0:
+    last_page = total_pages+1
 
 def next_page(n, max):
     get_T_info(n)
@@ -45,8 +51,8 @@ def get_T_info(x):
 
 
 for x in range(2, total_pages + 3):
-    print('=====================')
-    print('==========' + str(next_page(x, total_pages)) + '==========')
     print()
+    print('=======================')
+    print('==========' + str(next_page(x, total_pages)) + '/'+str(last_page)+'==========')
 
 driver.quit()
