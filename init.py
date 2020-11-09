@@ -2,39 +2,49 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import configparser as ConfigParser
+import json
 import io
 import argparse
 import re
 
+#Initialize arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--composer', type=str)
 parser.add_argument('-t', '--title', type=str) 
 parser.add_argument('-a', '--author', type=str)
 parser.add_argument('-l', '--list', action='store_true', default=False)
+parser.add_argument('-p', '--proxy', type=str, default="")
+parser.add_argument('-whl', '--without_headless', action='store_true', default=False)
 args = parser.parse_args()
 
-config = ConfigParser.RawConfigParser(allow_no_value=True)
-config.read('config/config.ini')
 
-CDP = config.get('ChromeDriver', 'path')
+#Initialize config.json
+with open('config/config.json') as f:
+  config = json.load(f)
+URL_Array = config["URL"]
+Elements_Array = config["Elements"]
 
-URL1 = config.get('URL', 'URL1')
-URL2 = config.get('URL', 'URL2')
 
-E1_1 = config.get('Elements', 'E1_1')
-E1_2 = config.get('Elements', 'E1_2')
-E1_3 = config.get('Elements', 'E1_3')
+#Initialize variables from config
+CDP = config["chromedriver_path"]
 
-E2 = config.get('Elements', 'E2')
-E3 = config.get('Elements', 'E3')
+URL1 = URL_Array[0]["URL1"]
+URL2 = URL_Array[0]["URL2"]
 
-E4_1 = config.get('Elements', 'E4_1')
-E4_2 = config.get('Elements', 'E4_2')
-E4_3 = config.get('Elements', 'E4_3')
+E1_1 = Elements_Array[0]["E1_1"]
+E1_2 = Elements_Array[0]["E1_2"]
+E1_3 = Elements_Array[0]["E1_3"]
 
-E5 = config.get('Elements', 'E5')
+E2 = Elements_Array[1]["E2"]
+E3 = Elements_Array[2]["E3"]
 
+E4_1 = Elements_Array[3]["E4_1"]
+E4_2 = Elements_Array[3]["E4_2"]
+E4_3 = Elements_Array[3]["E4_3"]
+
+E5 = Elements_Array[4]["E5"]
+
+#Initialize variables from argument(s) given
 if args.composer:
     mode = E1_3
     name = args.composer
@@ -44,16 +54,26 @@ elif args.title:
 elif args.author:
     mode = E1_2
     name = args.author
+else:
+    exit()
+
+if args.proxy:
+    proxy = args.proxy
+else:
+    proxy = ""
 
 def setup_chromedriver():
-    global chrome_options
-    global driver
     """Starts chromedriver with the correct settings.
     """
+    global chrome_options
+    global driver
     chrome_options = Options()
-    chrome_options.add_argument('--headless')
+    if args.without_headless == False:
+        chrome_options.add_argument('--headless')
     chrome_options.add_argument('--log-level=3')
     chrome_options.add_argument('--disable-gpu')
+    if len(proxy) > 0:
+        chrome_options.add_argument('--proxy-server=%s' % proxy)
     chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(CDP,
                             options=chrome_options)
