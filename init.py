@@ -64,7 +64,7 @@ def setup_page():
     """
     driver.get(URL1)
     driver.find_element_by_id(mode).send_keys(name)
-    driver.find_element_by_name(E2).click()
+    driver.find_element_by_id(E2).click()
 
 def info_page():
     global T_count
