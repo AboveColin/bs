@@ -6,6 +6,10 @@ import json
 import io
 import argparse
 import re
+from datetime import datetime
+
+now = datetime.now()
+dt = now.strftime("%d%m%Y-%H%M%S")
 
 #Initialize arguments
 parser = argparse.ArgumentParser()
@@ -15,6 +19,7 @@ parser.add_argument('-a', '--author', type=str)
 parser.add_argument('-l', '--list', action='store_true', default=False)
 parser.add_argument('-p', '--proxy', type=str, default="")
 parser.add_argument('-whl', '--without_headless', action='store_true', default=False)
+parser.add_argument('-s', '--save', action='store_true', default=False)
 args = parser.parse_args()
 
 
@@ -62,6 +67,10 @@ if args.proxy:
 else:
     proxy = ""
 
+if args.save:
+    f = open("saves/"+dt+".txt", "w")
+
+
 def setup_chromedriver():
     """Starts chromedriver with the correct settings.
     """
@@ -74,6 +83,8 @@ def setup_chromedriver():
     chrome_options.add_argument('--disable-gpu')
     if len(proxy) > 0:
         chrome_options.add_argument('--proxy-server=%s' % proxy)
+    prefs={"profile.managed_default_content_settings.images": 2, 'disk-cache-size': 4096 }
+    chrome_options.add_experimental_option('prefs', prefs)
     chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(CDP,
                             options=chrome_options)
