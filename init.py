@@ -8,9 +8,10 @@ import argparse
 import re
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-c', '--composer')
-parser.add_argument('-t', '--title') 
-parser.add_argument('-a', '--author')
+parser.add_argument('-c', '--composer', type=str)
+parser.add_argument('-t', '--title', type=str) 
+parser.add_argument('-a', '--author', type=str)
+parser.add_argument('-l', '--list', action='store_true', default=False)
 args = parser.parse_args()
 
 config = ConfigParser.RawConfigParser(allow_no_value=True)
