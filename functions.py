@@ -24,6 +24,9 @@ def get_T_info(x):
 
 def print_pages():
     for x in range(2, init.last_page + 2):
-        print()
-        print('========================')
-        print('==========' + str(next_page(x, init.total_pages)) + '/'+str(init.last_page)+'==========')
+        if init.args.list == True:
+            next_page(x, init.total_pages)
+        else:
+            print()
+            print('========================')
+            print('==========' + str(next_page(x, init.total_pages)) + '/'+str(init.last_page)+'==========')
