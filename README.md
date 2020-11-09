@@ -28,3 +28,7 @@ To start, use
 
 - `--without_headless`, `-whl`
 > Launch the python script without headless mode on.
+
+- `--save`, `-s`
+> Saves the output to a .txt file in the ``saves/`` folder
+
