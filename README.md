@@ -8,3 +8,6 @@
 ```
 pip install -r requirements.txt
 ```
+###
+To start use
+``python main.py``
