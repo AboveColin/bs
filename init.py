@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import WebDriverException
 import json
 import io
 import argparse
@@ -26,6 +27,7 @@ args = parser.parse_args()
 #Initialize config.json
 with open('config/config.json') as f:
   config = json.load(f)
+
 URL_Array = config["URL"]
 Elements_Array = config["Elements"]
 
@@ -94,7 +96,12 @@ def setup_chromedriver():
 def setup_page():
     """inserts name and submits it to create a cookie/sessionID
     """
-    driver.get(URL1)
+    try:
+        driver.get(URL1)
+    except WebDriverException as e:
+        driver.quit()
+        print("ERROR:", str(e))
+        exit()
     driver.find_element_by_id(mode).send_keys(name)
     driver.find_element_by_id(E2).click()
 
