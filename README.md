@@ -14,7 +14,7 @@ To start, use
 
 ## Arguments
 
-- Mode
+- Mode (**REQUIRED**)
   - `--composer "name"`, `-c "name"`
   - `--title "name"`, `-t "name"`
   - `--author "name"`, `-a "name"`
