@@ -13,11 +13,12 @@ To start, use
 ``python main.py``
 
 ## Arguments
+
 - Mode
   - `--composer "name"`, `-c "name"`
   - `--title "name"`, `-t "name"`
   - `--author "name"`, `-a "name"`
-> Use one of the above 3, to search in the appropiate category
+> Use one of the above 3, to search in the appropiate mode
 
 - `--list`, `-l` 
 > Displays all info in a list form, without interruptions
