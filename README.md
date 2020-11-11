@@ -32,3 +32,10 @@ To start, use
 - `--save`, `-s`
 > Saves the output to a .txt file in the ``saves/`` folder
 
+- `--sql`, `-sql`
+> Saves all the data to a MySQL server.
+
+- `--discord_webhook`, `-dwh` (*Requires --SQL to work properly*)
+> Send new entries to a discord webhook
+
+
