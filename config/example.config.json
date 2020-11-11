@@ -27,5 +27,20 @@
             "E5": ""
         }
 
+    ],
+    "MySQL": [
+        {
+            "host": "",
+            "port": "",
+            "user": "",
+            "password": "",
+            "database": ""
+        }
+    ],
+    "Discord": [
+        {
+            "Webhook_URL": ""
+        }
     ]
 }
+
