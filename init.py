@@ -3,7 +3,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import WebDriverException
-import mysql.connector
 import json
 import io
 import argparse
@@ -14,8 +13,7 @@ from datetime import datetime
 def time():
     return str(datetime.now().strftime("[ %H:%M:%S ]"))
 
-now = datetime.now()
-dt = now.strftime("%d%m%Y-%H%M%S")
+
 
 #Initialize arguments
 parser = argparse.ArgumentParser()
@@ -78,9 +76,12 @@ else:
     proxy = ""
 
 if args.save:
-    f = open("saves/"+dt+".txt", "w")
+    now = datetime.now()
+    filename = now.strftime("%d-%m-%Y-%H-%M-"+ name.replace(" ", "").replace("'", "").replace('"', ''))
+    f = open("saves/"+filename+".txt", "w")
 
 if args.sql:
+    import mysql.connector
     print(time() + "[ INFO ] Initializing SQL...")
     MySQL_Array = config["MySQL"]
     SQL_Host = MySQL_Array[0]["host"]
