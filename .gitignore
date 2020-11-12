@@ -1,2 +1,4 @@
+# Auto detect text files and perform LF normalization
+* text eol=lf
 __pycache__
 config/config.json
