@@ -7,10 +7,13 @@ import json
 import io
 import argparse
 import re
+import requests
 from datetime import datetime
 
-now = datetime.now()
-dt = now.strftime("%d%m%Y-%H%M%S")
+def time():
+    return str(datetime.now().strftime("[ %H:%M:%S ]"))
+
+
 
 #Initialize arguments
 parser = argparse.ArgumentParser()
@@ -21,15 +24,18 @@ parser.add_argument('-l', '--list', action='store_true', default=False)
 parser.add_argument('-p', '--proxy', type=str, default="")
 parser.add_argument('-whl', '--without_headless', action='store_true', default=False)
 parser.add_argument('-s', '--save', action='store_true', default=False)
+parser.add_argument('-sql', '--sql', action='store_true', default=False)
+parser.add_argument('-dwh', '--discord_webhook', action='store_true', default=False)
 args = parser.parse_args()
 
 
 #Initialize config.json
 with open('config/config.json') as f:
   config = json.load(f)
-
+  print(time() + '[ INFO ] Initializing config...')
 URL_Array = config["URL"]
 Elements_Array = config["Elements"]
+
 
 
 #Initialize variables from config
@@ -70,7 +76,33 @@ else:
     proxy = ""
 
 if args.save:
-    f = open("saves/"+dt+".txt", "w")
+    now = datetime.now()
+    filename = now.strftime("%d-%m-%Y-%H-%M-"+ name.replace(" ", "").replace("'", "").replace('"', ''))
+    f = open("saves/"+filename+".txt", "w")
+
+if args.sql:
+    import mysql.connector
+    print(time() + "[ INFO ] Initializing SQL...")
+    MySQL_Array = config["MySQL"]
+    SQL_Host = MySQL_Array[0]["host"]
+    SQL_Port = MySQL_Array[0]["port"]
+    SQL_User = MySQL_Array[0]["user"]
+    SQL_Pass = MySQL_Array[0]["password"]
+    SQL_DB = MySQL_Array[0]["database"]
+    
+    DB_con = mysql.connector.connect(
+        host=SQL_Host,
+        port=SQL_Port,
+        user=SQL_User,
+        password=SQL_Pass,
+        database=SQL_DB
+    )
+    import sql.sql
+
+if args.discord_webhook:
+    Discord_Array = config["Discord"]
+    Webhook_URL = Discord_Array[0]["Webhook_URL"]
+
 
 
 def setup_chromedriver():
@@ -78,6 +110,7 @@ def setup_chromedriver():
     """
     global chrome_options
     global driver
+    print(time() + "[ INFO ] Starting Chromedriver...")
     chrome_options = Options()
     if args.without_headless == False:
         chrome_options.add_argument('--headless')
@@ -97,10 +130,11 @@ def setup_page():
     """inserts name and submits it to create a cookie/sessionID
     """
     try:
+        print(time() + "[ INFO ] Submitting Data...")
         driver.get(URL1)
     except WebDriverException as e:
         driver.quit()
-        print("ERROR:", str(e))
+        print(time() + "[ ERROR ]", str(e))
         exit()
     driver.find_element_by_id(mode).send_keys(name)
     driver.find_element_by_id(E2).click()
@@ -110,14 +144,17 @@ def info_page():
     global total_pages
     global total_pages_rest
     global last_page
+    print(time() + "[ INFO ] Retrieving total track count...")
     driver.get(URL2)
     T_count = int(re.sub("[^0-9]", "", driver.find_element_by_id(E3).text))
+    print(time() + "[ INFO ] Total Track Count:", str(T_count))
     total_pages = T_count // 10
     total_pages_rest = T_count % 10
     
     if total_pages_rest != 0:
         last_page = total_pages+1
     else:
+        total_pages_rest = 10
         last_page = total_pages
 
 setup_chromedriver()
