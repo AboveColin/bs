@@ -8,6 +8,7 @@ import io
 import argparse
 import re
 import requests
+import crypt as crypt
 from datetime import datetime
 
 def time():
@@ -33,29 +34,26 @@ args = parser.parse_args()
 with open('config/config.json') as f:
   config = json.load(f)
   print(time() + '[ INFO ] Initializing config...')
-URL_Array = config["URL"]
-Elements_Array = config["Elements"]
-
 
 
 #Initialize variables from config
 CDP = config["chromedriver_path"]
 
-URL1 = URL_Array[0]["URL1"]
-URL2 = URL_Array[0]["URL2"]
+URL1 = crypt.URL1
+URL2 = crypt.URL2
 
-E1_1 = Elements_Array[0]["E1_1"]
-E1_2 = Elements_Array[0]["E1_2"]
-E1_3 = Elements_Array[0]["E1_3"]
+E1_1 = crypt.E1_1
+E1_2 = crypt.E1_2
+E1_3 = crypt.E1_3
 
-E2 = Elements_Array[1]["E2"]
-E3 = Elements_Array[2]["E3"]
+E2 = crypt.E2
+E3 = crypt.E3
 
-E4_1 = Elements_Array[3]["E4_1"]
-E4_2 = Elements_Array[3]["E4_2"]
-E4_3 = Elements_Array[3]["E4_3"]
+E4_1 = crypt.E4_1
+E4_2 = crypt.E4_2
+E4_3 = crypt.E4_3
 
-E5 = Elements_Array[4]["E5"]
+E5 = crypt.E5
 
 #Initialize variables from argument(s) given
 if args.composer:
