@@ -1,3 +1,4 @@
+import sql.setup as setup
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import functions as function
@@ -5,6 +6,9 @@ import init as init
 
 now = init.datetime.now()
 dt = now.strftime("%Y-%m-%d %H:%M:%S")
+
+if setup.check_already_exists() == False:
+    setup.create_Tables()
 
 def get_artistID(Artist):
     Cursor = init.DB_con.cursor()
