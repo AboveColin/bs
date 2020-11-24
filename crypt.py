@@ -1,0 +1,23 @@
+from cryptography.fernet import Fernet
+
+def load_key():
+    return open("config/secret.key", "rb").read()
+
+def decrypt_message(encrypted_message):
+    key = load_key()
+    f = Fernet(key)
+    decrypted_message = f.decrypt(encrypted_message)
+
+    return decrypted_message.decode()
+
+URL1 = decrypt_message(b'gAAAAABfsXmzw7UN-0ve6KANTQzcYWg5Q7ePz5jmLpa2yXw_PugEH4CM4tPUX_mbW_rTHMnbl1Bw051WaX7CCMXaL3IgzQJkiaWcFSfro5mSUqRo-H_vy3mR7NMm_LLAHZijaiHtDiRiq1Y1mIC7YwU5YBnZg-AmRDvVkNz78P4pfoiNWvqscypBHMxrtOMJZtkvdP8nC17H')
+URL2 = decrypt_message(b'gAAAAABfsXmz4gO-MZN3LgzYadTtbPPj852BOcjEAL3oS6nqiTudYy-LLMlm3CqO4d2bTUIVycWStTTcPC1fiCUMO8f6sVMfGa0w5QRSPm28OGOPKkJg4DbdIsO-4l5kG5mofKnpprtaMu3V0ssOot7ZZ_Gtx7rGS_2Oc5Megl0vUPjfw_ZjCvBRXSHlYgC2rAl2-6CsVOeG')
+E1_1 = decrypt_message(b'gAAAAABfsXmzmK_7e5Udp1eV6y9w7prw69vAXqBm3IdKEe6DHIWBcpO1loBs7c3u33EgJDZn5JrbGp7FFUgieZHeDjFow8xvOShN9VihEBdFs9Q1CJqVGmCNRY-erHq0Gw5Gw9Gfssnq')
+E1_2 = decrypt_message(b'gAAAAABfsXmzlTesuwF2PVIcWND_O5u17JiK8pPrknQmqQCkctj-Uag6CTTIi9gSm1g2UR8khCgtgoXj_oPWqW35zOjJ4vPHfjLMZACC2UZJYvauuAQeIjS_kmjdTkcjc0MXyxJgRP53')
+E1_3 = decrypt_message(b'gAAAAABfsXmzs0_LYhVom73Qc7SeWAI7lnuBycKjONwdcvgmX8r0kwCKQ9y6bLDqxhJk6rqhWbETogXWOY4sJ-yfSbKoTVL9D2kZc90PKs6Mda1_sZLsRQNfvjLVO1G8hoPNTratLbdC')
+E2 = decrypt_message(b'gAAAAABfsXmzCG-wtU8ZYhOloNm7wLW8ctwacdYSrYQVC3K7fYRn7boMxH0AjC2BZrelzXUA8sjCgGLHcpwI5Bg3oQ4OgjchGUjN87AxLbOXZYQM1R2a2RMtxLCVovwHVwSRxcsIgXp4')
+E3 = decrypt_message(b'gAAAAABfsXmzyY6IvOzIrkQJju6KlhPY66egMGwv4Lfz2Y0uBavJsJZmHU_8G2lHSt65XTUxk1K9ot8gy7gihAWKBH_qADXam30dYeT-VFg3PctlAtAc7trxDC1cr-Sq7EWNbm20mk3e')
+E4_1 = decrypt_message(b'gAAAAABfsXmzz4nAIm7x-nszYKctR-HNSRQGDDTv5OOGuPM66ySlka0NeR8-E5-aBdn9HVXSB0WIs9p_H7tiaJDxNOiWAcwhSWtT2wfugDlrwZMtUAvrzfMZgPsnc4xDYkMJwrypGd7B')
+E4_2 = decrypt_message(b'gAAAAABfsXmzXtKFAHeuMcvgUww_h7Uf3z3XPzObzZg_1LfLOQFCFBPAljxxazEUjYvH-B-OQhu7cmfxP-TgUDYCnwcu3w7EyA==')
+E4_3 = decrypt_message(b'gAAAAABfsXmzPkAD_KZQ5-mUPqon7B28de1hz5N7fghdYFshTCn-Zh4G2CSYgwdYgIkE-4CkGBlh6T7swF9P6ArvVkNodwB-7g==')
+E5 = decrypt_message(b'gAAAAABfsXmzcg0C5qmXQ4W5SUV_tkExs5dd-TUcbVBYnYkapvolUX0RKKXNB053f8sMEKU5yqHfajBc074FLuVmDauC9KBo_1veJ6jCkATSRuxbvxuwKTR8VdOw86en7JxXrWIPgAr0')

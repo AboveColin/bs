@@ -1,31 +1,18 @@
 {
     "chromedriver_path": "",
-    "URL": [
+    "MySQL": [
         {
-            "URL1": "",
-            "URL2": ""
+            "host": "",
+            "port": "",
+            "user": "",
+            "password": "",
+            "database": ""
         }
     ],
-    "Elements": [
+    "Discord": [
         {
-            "E1_1": "",
-            "E1_2": "",
-            "E1_3": ""
-        },
-        {
-            "E2": ""
-        },
-        {
-            "E3": ""
-        },
-        {
-            "E4_1": "",
-            "E4_2": "",
-            "E4_3": ""
-        },
-        {
-            "E5": ""
+            "Webhook_URL": ""
         }
-
     ]
 }
+
