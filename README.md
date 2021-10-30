@@ -16,7 +16,11 @@ To start, use
 
 - Mode (**REQUIRED**)
   - `--composer "name"`, `-c "name"`
+  
+  or
   - `--title "name"`, `-t "name"`
+  
+  or
   - `--author "name"`, `-a "name"`
 > Use one of the above 3, to search in the appropiate mode
 
