@@ -1,45 +1,93 @@
 # BS
- 
-## Requirements:
-- Google Chrome 
-- ChromeDriver binary
-- Python 3.6
-## How To Install
-```
+
+BS is a data extraction tool designed to streamline the process of retrieving information. It offers a range of functionalities, from querying specific data to saving and sharing the results. The tool is compatible with Google Chrome and can be easily set up and executed on a machine with Python 3.6 installed.
+
+## Prerequisites
+
+- Google Chrome Browser
+- ChromeDriver binary compatible with your Chrome version
+- Python 3.6 or higher
+
+## Installation
+
+Clone the repository and install the required dependencies using the following commands:
+
+```sh
+git clone <repository-link>
+cd <repository-directory>
 pip install -r requirements.txt
 ```
-###
-To start, use
-``python main.py``
 
-## Arguments
+## Usage
 
-- Mode (**REQUIRED**)
-  - `--composer "name"`, `-c "name"`
+Execute the `main.py` script with appropriate arguments to start the search process:
+
+```sh
+python main.py <arguments>
+```
+
+### Arguments
+
+#### Mode (One of the following is **REQUIRED**)
+
+- **Composer Mode:**
+  - Search by composer name.
+  - Use: `-c "composer name"` or `--composer "composer name"`
   
-  or
-  - `--title "name"`, `-t "name"`
+- **Title Mode:**
+  - Search by title name.
+  - Use: `-t "title name"` or `--title "title name"`
   
-  or
-  - `--author "name"`, `-a "name"`
-> Use one of the above 3, to search in the appropiate mode
+- **Author Mode:**
+  - Search by author name.
+  - Use: `-a "author name"` or `--author "author name"`
 
-- `--list`, `-l` 
-> Displays all info in a list form, without interruptions
+#### Optional
 
-- `--proxy "127.0.0.1:1234"`, `-p "127.0.0.1:1234"`
-> Use a proxy when accessing data
+- **List Mode:**
+  - Display all information in a list without interruptions.
+  - Use: `-l` or `--list`
+  
+- **Proxy:**
+  - Access data using a specific proxy.
+  - Use: `-p "127.0.0.1:1234"` or `--proxy "127.0.0.1:1234"`
+  
+- **Without Headless:**
+  - Launch the script with the browser window visible.
+  - Use: `-whl` or `--without_headless`
+  
+- **Save:**
+  - Save the output to a text file located in the `saves/` directory.
+  - Use: `-s` or `--save`
+  
+- **SQL:**
+  - Store the data in a MySQL database.
+  - Use: `-sql` or `--sql`
+  
+- **Discord Webhook (requires SQL to be enabled):**
+  - Send new database entries to a specified Discord webhook.
+  - Use: `-dwh` or `--discord_webhook`
 
-- `--without_headless`, `-whl`
-> Launch the python script without headless mode on.
+## Examples
 
-- `--save`, `-s`
-> Saves the output to a .txt file in the ``saves/`` folder
+Search for information by composer name, display it in list form, and save the output to a text file:
 
-- `--sql`, `-sql`
-> Saves all the data to a MySQL server.
+```sh
+python main.py -c "Beethoven" -l -s
+```
 
-- `--discord_webhook`, `-dwh` (*Requires --SQL to work properly*)
-> Send new entries to a discord webhook
+Retrieve data by title, use a proxy for the connection, and save the results to a MySQL database:
 
+```sh
+python main.py -t "Moonlight Sonata" -p "127.0.0.1:1234" -sql
+```
 
+## Contributing
+
+Feel free to fork the repository and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
+
+## Acknowledgements
+
+- Thanks to everyone who contributed to the development and enhancement of this tool.
+
+---
